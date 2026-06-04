@@ -72,7 +72,7 @@ def _parse_failure_blocks(log_text: str) -> dict[str, str]:
             continue
 
         if current_test_name:
-            if stripped.startswith("FAILED "):
+            if stripped.startswith("FAILED ") or _is_section_header(stripped):
                 blocks[current_test_name] = "\n".join(current_block).strip()
                 current_test_name = None
                 current_block = []
@@ -91,6 +91,14 @@ def _is_failure_header(line: str) -> bool:
         line.startswith("_")
         and line.endswith("_")
         and len(line.strip("_").strip()) > 0
+    )
+
+
+def _is_section_header(line: str) -> bool:
+    return (
+        line.startswith("=")
+        and line.endswith("=")
+        and len(line.strip("=").strip()) > 0
     )
 
 

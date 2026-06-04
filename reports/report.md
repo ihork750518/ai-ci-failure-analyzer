@@ -40,8 +40,6 @@ def test_get_user():
 E       requests.exceptions.ConnectionError: Failed to establish a new connection
 
 tests/test_api.py:8: ConnectionError
-
-=========================== short test summary info ============================
 ```
 
 </details>

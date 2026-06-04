@@ -13,7 +13,7 @@
       "error_line": "requests.exceptions.ConnectionError",
       "category": "API / environment connectivity issue",
       "suggested_next_step": "Check service availability, network, environment config, and credentials.",
-      "failure_block": "def test_get_user():\n>       response = requests.get(\"https://api.example.com/users/1\")\nE       requests.exceptions.ConnectionError: Failed to establish a new connection\n\ntests/test_api.py:8: ConnectionError\n\n=========================== short test summary info ============================"
+      "failure_block": "def test_get_user():\n>       response = requests.get(\"https://api.example.com/users/1\")\nE       requests.exceptions.ConnectionError: Failed to establish a new connection\n\ntests/test_api.py:8: ConnectionError"
     }
   ]
 }
