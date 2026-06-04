@@ -1,0 +1,19 @@
+{
+  "total_failed_tests": 2,
+  "failures": [
+    {
+      "test_id": "tests/test_export.py::test_export_image",
+      "error_line": "AssertionError: assert False",
+      "category": "Assertion failure",
+      "suggested_next_step": "Check expected vs actual result and test data.",
+      "failure_block": "def test_export_image():\n>       assert output_file.exists()\nE       AssertionError: assert False\n\ntests/test_export.py:12: AssertionError"
+    },
+    {
+      "test_id": "tests/test_api.py::test_get_user",
+      "error_line": "requests.exceptions.ConnectionError",
+      "category": "API / environment connectivity issue",
+      "suggested_next_step": "Check service availability, network, environment config, and credentials.",
+      "failure_block": "def test_get_user():\n>       response = requests.get(\"https://api.example.com/users/1\")\nE       requests.exceptions.ConnectionError: Failed to establish a new connection\n\ntests/test_api.py:8: ConnectionError\n\n=========================== short test summary info ============================"
+    }
+  ]
+}

@@ -30,6 +30,17 @@ def generate_markdown_report(failed_tests: list[FailedTest]) -> str:
         lines.append(f"- Suggested next step: {suggest_next_step(category)}")
         lines.append("")
 
+        if test.failure_block:
+            lines.append("<details>")
+            lines.append("<summary>Failure details</summary>")
+            lines.append("")
+            lines.append("```text")
+            lines.append(test.failure_block)
+            lines.append("```")
+            lines.append("")
+            lines.append("</details>")
+            lines.append("")
+
     return "\n".join(lines)
 
 
