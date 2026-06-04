@@ -1,0 +1,30 @@
+============================= test session starts =============================
+platform darwin -- Python 3.13.0, pytest-8.3.4
+collected 3 items
+
+tests/test_login.py::test_valid_login PASSED
+tests/test_export.py::test_export_image FAILED
+tests/test_api.py::test_get_user FAILED
+
+================================== FAILURES ===================================
+
+____________________________ test_export_image _____________________________
+
+    def test_export_image():
+>       assert output_file.exists()
+E       AssertionError: assert False
+
+tests/test_export.py:12: AssertionError
+
+____________________________ test_get_user _____________________________
+
+    def test_get_user():
+>       response = requests.get("https://api.example.com/users/1")
+E       requests.exceptions.ConnectionError: Failed to establish a new connection
+
+tests/test_api.py:8: ConnectionError
+
+=========================== short test summary info ============================
+FAILED tests/test_export.py::test_export_image - AssertionError: assert False
+FAILED tests/test_api.py::test_get_user - requests.exceptions.ConnectionError
+========================= 2 failed, 1 passed in 3.42s ==========================

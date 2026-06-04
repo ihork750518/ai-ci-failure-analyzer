@@ -1,0 +1,2 @@
+[console_scripts]
+ci-analyze = ci_failure_analyzer.cli:main

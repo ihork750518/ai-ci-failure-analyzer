@@ -1,0 +1,18 @@
+[project]
+name = "ai-ci-failure-analyzer"
+version = "0.1.0"
+description = "A Python tool for analyzing CI/test failure logs and generating readable reports."
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[project.scripts]
+ci-analyze = "ci_failure_analyzer.cli:main"
