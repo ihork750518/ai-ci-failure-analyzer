@@ -19,6 +19,7 @@ This tool helps quickly extract failed tests from logs, classify common failure 
 * Suggest basic next steps for investigation
 * Covered with pytest tests
 * Can be used as a CLI tool
+* Aggregates failed tests by category to highlight the most common CI failure reasons.
 
 ## Supported failure categories
 

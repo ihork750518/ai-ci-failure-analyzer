@@ -1,5 +1,9 @@
 {
   "total_failed_tests": 2,
+  "failure_categories": {
+    "Assertion failure": 1,
+    "API / environment connectivity issue": 1
+  },
   "failures": [
     {
       "test_id": "tests/test_export.py::test_export_image",

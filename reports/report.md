@@ -4,6 +4,13 @@
 
 Total failed tests: 2
 
+## Failure Categories
+
+| Category | Count |
+|---|---:|
+| Assertion failure | 1 |
+| API / environment connectivity issue | 1 |
+
 ## Failed Tests
 
 ### tests/test_export.py::test_export_image

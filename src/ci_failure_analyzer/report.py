@@ -1,3 +1,5 @@
+from collections import Counter
+
 from ci_failure_analyzer.classifier import classify_failure
 from ci_failure_analyzer.parser import FailedTest
 
@@ -17,6 +19,22 @@ def generate_markdown_report(failed_tests: list[FailedTest]) -> str:
         lines.append("")
         return "\n".join(lines)
 
+    categories = [
+        classify_failure(test.error_line)
+        for test in failed_tests
+    ]
+
+    failure_trends = Counter(categories)
+
+    lines.append("## Failure Categories")
+    lines.append("")
+    lines.append("| Category | Count |")
+    lines.append("|---|---:|")
+
+    for category, count in failure_trends.items():
+        lines.append(f"| {category} | {count} |")
+
+    lines.append("")
     lines.append("## Failed Tests")
     lines.append("")
 
