@@ -39,3 +39,18 @@ def test_generate_report_with_failure_block():
     assert "<details>" in report
     assert "Failure details" in report
     assert "E       AssertionError: assert False" in report
+
+
+def test_markdown_report_contains_flaky_candidate_info():
+    failed_tests = [
+        FailedTest(
+            test_id="tests/test_api.py::test_get_user",
+            error_line="requests.exceptions.ConnectionError",
+            failure_block="ConnectionError details",
+        )
+    ]
+
+    report = generate_markdown_report(failed_tests)
+
+    assert "- Flaky candidate: **Yes**" in report
+    assert "- Flaky reason: Connectivity failure may be caused by network instability, unavailable service, or environment configuration issue." in report

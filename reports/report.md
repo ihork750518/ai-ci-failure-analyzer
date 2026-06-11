@@ -18,6 +18,8 @@ Total failed tests: 2
 - Error: `AssertionError: assert False`
 - Category: **Assertion failure**
 - Suggested next step: Check expected vs actual result and test data.
+- Flaky candidate: **No**
+- Flaky reason: Not detected as a flaky candidate.
 
 <details>
 <summary>Failure details</summary>
@@ -37,6 +39,8 @@ tests/test_export.py:12: AssertionError
 - Error: `requests.exceptions.ConnectionError`
 - Category: **API / environment connectivity issue**
 - Suggested next step: Check service availability, network, environment config, and credentials.
+- Flaky candidate: **Yes**
+- Flaky reason: Connectivity failure may be caused by network instability, unavailable service, or environment configuration issue.
 
 <details>
 <summary>Failure details</summary>

@@ -1,6 +1,7 @@
 from collections import Counter
 
 from ci_failure_analyzer.classifier import classify_failure
+from ci_failure_analyzer.flaky import get_flaky_reason, is_flaky_candidate
 from ci_failure_analyzer.parser import FailedTest
 
 
@@ -40,12 +41,22 @@ def generate_markdown_report(failed_tests: list[FailedTest]) -> str:
 
     for test in failed_tests:
         category = classify_failure(test.error_line)
+        flaky_candidate = is_flaky_candidate(
+            category=category,
+            error_line=test.error_line,
+        )
+        flaky_reason = get_flaky_reason(
+            category=category,
+            error_line=test.error_line,
+        )
 
         lines.append(f"### {test.test_id}")
         lines.append("")
         lines.append(f"- Error: `{test.error_line}`")
         lines.append(f"- Category: **{category}**")
         lines.append(f"- Suggested next step: {suggest_next_step(category)}")
+        lines.append(f"- Flaky candidate: **{format_bool(flaky_candidate)}**")
+        lines.append(f"- Flaky reason: {flaky_reason}")
         lines.append("")
 
         if test.failure_block:
@@ -60,6 +71,13 @@ def generate_markdown_report(failed_tests: list[FailedTest]) -> str:
             lines.append("")
 
     return "\n".join(lines)
+
+
+def format_bool(value: bool) -> str:
+    if value:
+        return "Yes"
+
+    return "No"
 
 
 def suggest_next_step(category: str) -> str:
