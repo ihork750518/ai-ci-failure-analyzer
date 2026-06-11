@@ -21,6 +21,7 @@ This tool helps quickly extract failed tests from logs, classify common failure 
 * Can be used as a CLI tool
 * Aggregates failed tests by category to highlight the most common CI failure reasons.
 * Detects potential flaky failures based on error category and failure patterns.
+* Assigns severity levels to failures to help prioritize CI investigation.
 
 ## Supported failure categories
 

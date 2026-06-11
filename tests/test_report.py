@@ -54,3 +54,24 @@ def test_markdown_report_contains_flaky_candidate_info():
 
     assert "- Flaky candidate: **Yes**" in report
     assert "- Flaky reason: Connectivity failure may be caused by network instability, unavailable service, or environment configuration issue." in report
+
+
+def test_markdown_report_contains_severity_info():
+    failed_tests = [
+        FailedTest(
+            test_id="tests/test_api.py::test_get_user",
+            error_line="requests.exceptions.ConnectionError",
+            failure_block="ConnectionError details",
+        )
+    ]
+
+    report = generate_markdown_report(failed_tests)
+
+    assert "## Severity Counts" in report
+    assert "| Severity | Count |" in report
+    assert "| high | 1 |" in report
+    assert "- Severity: **high**" in report
+    assert (
+        "- Severity reason: High severity failure may block CI execution "
+        "or indicate environment, dependency, or service availability problems."
+    ) in report
