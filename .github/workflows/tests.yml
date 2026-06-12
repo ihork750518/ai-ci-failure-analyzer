@@ -2,18 +2,21 @@ name: Tests
 
 on:
   push:
+    branches:
+      - main
   pull_request:
 
 jobs:
   test:
+    name: Run pytest
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.13"
 
@@ -25,3 +28,22 @@ jobs:
       - name: Run tests
         run: |
           python -m pytest -v
+
+      - name: Generate sample failure reports
+        if: always()
+        run: |
+          mkdir -p reports
+          python -m ci_failure_analyzer.cli samples/pytest_failure.log --output reports/report.md --json-output reports/report.json
+
+      - name: Publish sample failure report summary
+        if: always()
+        run: |
+          echo "## Sample CI Failure Analyzer Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          cat reports/report.md >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## JSON Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo '```json' >> $GITHUB_STEP_SUMMARY
+          python -m json.tool reports/report.json >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
